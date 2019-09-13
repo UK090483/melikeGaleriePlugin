@@ -1,0 +1,236 @@
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+.wp-block-cgb-block-my-block {
+  background: orangered;
+  border: 0.2rem solid #292929;
+  color: #292929;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem; }
+
+.ku-card-wrap {
+  width: calc(100% + 10px);
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -5px;
+  margin-right: 5px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+
+.ku-card {
+  padding: 0 5px 0 5px;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 40px;
+  width: 100%; }
+  @media screen and (min-width: 501px) {
+    .ku-card {
+      width: 50%; } }
+  @media screen and (min-width: 700px) {
+    .ku-card {
+      width: 33.33333333333%; } }
+  .ku-card h4 {
+    margin: 0; }
+
+.ku-card-pic {
+  width: 100%;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s; }
+  @media screen and (min-width: 501px) {
+    .ku-card-pic {
+      height: 200px; } }
+  @media screen and (min-width: 700px) {
+    .ku-card-pic {
+      height: 200px; } }
+
+.ku-card:hover {
+  text-decoration: none;
+  color: inherit; }
+  @media screen and (min-width: 501px) {
+    .ku-card:hover .ku-card-pic {
+      -webkit-transform: scale(1.03);
+          -ms-transform: scale(1.03);
+              transform: scale(1.03); } }
+
+.ku-card-info {
+  padding: 20px; }
+
+.ku-card-date h5 {
+  margin: 0;
+  text-align: center; }
+
+.hero {
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-size: cover; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.hero-wrap {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  overflow: hidden; }
+
+.hero-image {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-blend-mode: overlay;
+  background-position: center;
+  background-size: cover;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-name: blendIn;
+          animation-name: blendIn;
+  -webkit-animation-timing-function: cubic-bezier(1, 0.19, 0.66, 1.28);
+          animation-timing-function: cubic-bezier(1, 0.19, 0.66, 1.28);
+  color: white; }
+  .hero-image * {
+    font-size: 2.5rem;
+    color: white; }
+
+.hero_innerblock {
+  opacity: 0;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: blendInnerText;
+          animation-name: blendInnerText;
+  -webkit-animation-timing-function: cubic-bezier(1, 0.19, 0.66, 1.28);
+          animation-timing-function: cubic-bezier(1, 0.19, 0.66, 1.28);
+  color: white; }
+
+@-webkit-keyframes blendIn {
+  form {
+    background-color: rgba(255, 255, 255, 0); }
+  to {
+    background-color: rgba(34, 34, 34, 0.432); } }
+
+@keyframes blendIn {
+  form {
+    background-color: rgba(255, 255, 255, 0); }
+  to {
+    background-color: rgba(34, 34, 34, 0.432); } }
+
+@-webkit-keyframes blendInnerText {
+  form {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes blendInnerText {
+  form {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.fade-animate {
+  height: 200px;
+  position: relative; }
+  .fade-animate span {
+    font-size: 2rem; }
+  .fade-animate span:nth-child(2n) {
+    -webkit-animation-name: fade;
+            animation-name: fade;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+    -webkit-animation-duration: 4.8s;
+            animation-duration: 4.8s; }
+  .fade-animate span:nth-child(3n) {
+    -webkit-animation-name: fade;
+            animation-name: fade;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+    -webkit-animation-duration: 3.8s;
+            animation-duration: 3.8s; }
+  .fade-animate span:nth-child(5n) {
+    -webkit-animation-name: fade;
+            animation-name: fade;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+    -webkit-animation-duration: 2.6s;
+            animation-duration: 2.6s; }
+  .fade-animate span:nth-child(7n) {
+    -webkit-animation-name: fade;
+            animation-name: fade;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+    -webkit-animation-duration: 5.5s;
+            animation-duration: 5.5s; }
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.1; }
+  to {
+    opacity: 1; } }
+
+@keyframes fade {
+  from {
+    opacity: 0.1; }
+  to {
+    opacity: 1; } }

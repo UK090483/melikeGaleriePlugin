@@ -1,0 +1,66 @@
+$duration: 1s;
+$delay: 1s;
+$tfunc: cubic-bezier(1, 0.19, 0.66, 1.28);
+.hero-wrap {
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+.hero-image {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	// background-color: rgba(255, 255, 255, 0.247);
+	background-blend-mode: overlay;
+	background-position: center;
+	background-size: cover;
+	// background-attachment: fixed;
+
+	animation-duration: $duration;
+	animation-fill-mode: forwards;
+	animation-delay: $delay;
+	animation-name: blendIn;
+	animation-timing-function: $tfunc;
+	color: white;
+
+	* {
+		// text-shadow: 0 0 3px #ffffff98, 0 0 5px #ffffff7a;
+		font-size: 2.5rem;
+		color: white;
+	}
+}
+
+.hero_innerblock {
+	opacity: 0;
+	animation-delay: $delay;
+	animation-duration: $duration;
+	animation-fill-mode: forwards;
+	animation-name: blendInnerText;
+	animation-timing-function: $tfunc;
+	color: white;
+}
+
+@keyframes blendIn {
+	form {
+		background-color: rgba(255, 255, 255, 0);
+	}
+
+	to {
+		background-color: rgba(34, 34, 34, 0.432);
+	}
+}
+@keyframes blendInnerText {
+	form {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

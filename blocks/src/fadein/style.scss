@@ -1,0 +1,43 @@
+.fade-animate {
+	height: 200px;
+	position: relative;
+
+	span {
+		font-size: 2rem;
+	}
+
+	span:nth-child(2n) {
+		animation-name: fade;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		animation-duration: 4.8s;
+	}
+	span:nth-child(3n) {
+		animation-name: fade;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		animation-duration: 3.8s;
+	}
+
+	span:nth-child(5n) {
+		animation-name: fade;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		animation-duration: 2.6s;
+	}
+	span:nth-child(7n) {
+		animation-name: fade;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		animation-duration: 5.5s;
+	}
+}
+
+@keyframes fade {
+	from {
+		opacity: 0.1;
+	}
+	to {
+		opacity: 1;
+	}
+}
