@@ -11,5 +11,6 @@
 import "./show-posts/show-posts.js";
 import "./hero/hero.js";
 import "./metablock/metablock.js";
-import "./tester/tester.js";
+import "./date/date.js";
 import "./fadein/fadein.js";
+import "./sozial_links/sozial_links";
