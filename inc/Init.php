@@ -15,7 +15,7 @@ final class Init
         return [
             Classes\CustomPostTypes::class,
             Classes\AusstellungenController::class,
-       //     Classes\ArtistsController::class,
+            Classes\ArtistsController::class,
             Classes\ProjekteController::class,
             Blocks\PostsBlock::class,
             Blocks\HeroBlock::class,

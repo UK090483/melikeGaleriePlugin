@@ -1,0 +1,15 @@
+.wp-block-cgb-sozial-links{
+    display:flex;
+    justify-content: flex-start;
+   
+    @media (max-width: 600px) {
+        justify-content: center;
+      }
+      a{
+          margin-right: 20px;
+          transition: all 0.3s;
+      }
+      a:hover{
+          transform: scale(1.03);
+      }
+    }

@@ -246,3 +246,21 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.wp-block-cgb-sozial-links {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start; }
+  @media (max-width: 600px) {
+    .wp-block-cgb-sozial-links {
+      -ms-flex-pack: center;
+          justify-content: center; } }
+  .wp-block-cgb-sozial-links a {
+    margin-right: 20px;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s; }
+  .wp-block-cgb-sozial-links a:hover {
+    -webkit-transform: scale(1.03);
+        -ms-transform: scale(1.03);
+            transform: scale(1.03); }
