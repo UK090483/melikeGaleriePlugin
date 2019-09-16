@@ -10,8 +10,8 @@ class CustomPostTypes
 
         $this->custom_post_types = array(
             array(
-                'name' => 'Artist',
-                'label' => 'Artist',
+                'name' => 'artists',
+                'label' => 'Artists',
 
             ),
             array(

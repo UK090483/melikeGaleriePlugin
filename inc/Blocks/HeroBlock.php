@@ -40,7 +40,7 @@ class HeroBlock
 
     public function my_block_render($attributes, $posts)
     {
-        error_log(json_encode($posts));
+      
         return isset($attributes['auto']) && $attributes['auto'] ? $this->getAutoGeneratetContent($attributes) : $this->getCustumGeneratetContent($attributes);
 
     }
