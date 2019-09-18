@@ -10,39 +10,45 @@ export default class PostTaxClass extends Component {
 			wp.apiFetch({
 				path: "/wp/v2/" + type
 			}).then(pt => {
-				this.setState({
-					postTypes: pt
-				});
-				// console.log(pt);
+				// this.setState({
+				// 	postTypes: pt
+				// });
+				 console.log(pt);
 			});
 		};
 
 		this.getTaxonomies = () => {
-			let res = [];
-			if (this.props.postTypes) {
-				this.props.postTypes.forEach(element => {
-					if (element.name === this.props.attributes.selectedCategory) {
-						res = [...element.taxonomies];
-					}
-				});
+			if (this.props.postTypes && this.props.attributes.selectedCategory) {
+				let postElement = this.getPostElement()
+				let res = postElement? postElement.taxonomies : false;
+				console.log(res);
+				if(res){
+					this.getclaims(res);
+				}
 			}
-			return res;
+			
 		};
+
+		this.getPostElement=()=>{
+			return this.props.postTypes.find((element)=>{
+				return this.props.attributes.selectedCategory === element.slug })
+		}
+
+		this.getclaims=(tax)=>{
+			tax.forEach(element => {
+				this.fetchTax(element);
+			});
+		}
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		this.getTaxonomies();
-		// this.props.attributes.selectedCategory !==
-		// 	prevProps.attributes.selectedCategory &&
-		// 	// this.fetchTax(
-		// 	// 	this.props.postTypes[this.props.attributes.selectedCategory].taxonomies
-		// 	// );
+		console.log(this.getTaxonomies())
+	
 	}
 
 	componentDidMount() {
-		this.getTaxonomies();
+		console.log(this.getTaxonomies())
 
-		// this.fetchTax(this.props.attributes.selectedCategory);
 	}
 
 	render() {

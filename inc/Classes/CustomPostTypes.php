@@ -11,16 +11,20 @@ class CustomPostTypes
         $this->custom_post_types = array(
             array(
                 'name' => 'artists',
+                'singular_name'=> 'artist',
                 'label' => 'Artists',
+              
 
             ),
             array(
                 'name' => 'ausstellungen',
+                'singular_name'=> 'ausstellung',
                 'label' => 'Ausstellungen',
                 'taxonomies' => array('kutypes'),
             ),
             array(
                 'name' => 'projekte',
+                'singular_name'=> 'projekt',
                 'label' => 'Projekte',
             ),
 
@@ -38,18 +42,18 @@ class CustomPostTypes
             register_post_type($post_type['name'],
                 array(
                     'labels' => array(
-                        'name' => $post_type['name'],
+                        'name' => $post_type['label'],
                         'singular_name' => (isset($post_type['singular_name']) ? $post_type['singular_name'] : $post_type['name']),
                         'menu_name' => (isset($post_type['menu_name']) ? $post_type['menu_name'] : $post_type['label']),
                         'name_admin_bar' => (isset($post_type['name_admin_bar']) ? $post_type['name_admin_bar'] : $post_type['name']),
-                        'archives' => (isset($post_type['archives']) ? $post_type['archives'] : $post_type['name'] . 'Archive'),
-                        // 'attributes'            => $post_type['attributes']  ||$post_type['name'] . 'Attributes',
-                        // 'parent_item_colon'     => $post_type['parent_item_colon'] || 'parent' . $post_type['name'] ,
-                        // 'all_items'             => $post_type['all_items'] || 'All' . $post_type['name'],
-                        'add_new_item' => (isset($post_type['add_new_item']) ? $post_type['add_new_item'] : ('Add New' . $post_type['label'])),
-                        // 'add_new'               => $post_type['add_new'] || 'Add New' . $post_type['name'],
+                        'archives' => (isset($post_type['archives']) ? $post_type['archives'] : ucfirst($post_type['singular_name']) . ' Archives'),
+                        'attributes'            => (isset($post_type['attributes']) ? $post_type['attributes'] : ucfirst($post_type['singular_name']) . ' Attributes'),
+                    // 'parent_item_colon'     => $post_type['parent_item_colon'] || 'parent' . $post_type['name'] ,
+                        'all_items'             => (isset($post_type['all_items']) ? $post_type['all_items'] : 'All ' . $post_type['name']),
+                        'add_new_item' => (isset($post_type['add_new_item']) ? $post_type['add_new_item'] : ('Add New' . ucfirst($post_type['singular_name']))),
+                        'add_new'               => 'Add New',
                         'new_item' => (isset($post_type['new_item']) ? $post_type['new_item'] : 'New' . $post_type['label']),
-                        // 'edit_item'             => $post_type['edit_item'] || 'Edit' . $post_type['name'],
+                        'edit_item'             => (isset($post_type['edit_item']) ? $post_type['edit_item'] : 'New ' . ucfirst($post_type['singular_name'])),
                         // 'update_item'           => $post_type['update_item'] || 'Update' . $post_type['name'],
                         // 'view_item'             => $post_type['view_item'] || 'Update' . $post_type['name'],
                         // 'view_items'            => $post_type['view_items'] || 'Update' . $post_type['name'],
@@ -70,7 +74,7 @@ class CustomPostTypes
                     'description' => $post_type['name'] . 'Custom Post Type',
                     // 'supports' => array('thumbnail,editor'),
                     'show_in_rest' => true,
-                    'taxonomies' => isset($post_type['taxonomies']) ? $post_type['taxonomies'] : array('no'),
+                    'taxonomies' => isset($post_type['taxonomies']) ? $post_type['taxonomies'] : array(),
                     'hierarchical' => false,
                     'public' => true,
                     'show_ui' => true,
@@ -93,54 +97,3 @@ class CustomPostTypes
     }
 }
 
-// function ku_setup_post_types()
-// {
-
-//     register_post_type('artist',
-//         array(
-//             'label' => 'Artist',
-//             'public' => true,
-//             'publicly_queryable' => true,
-//             'show_ui' => true,
-//             'show_in_menu' => true,
-//             'query_var' => true,
-//             'rewrite' => true,
-//             'capability_type' => 'post',
-//             'has_archive' => true,
-//             'hierarchical' => false,
-//             'menu_position' => 2,
-//             'show_in_rest' => true,
-//         )
-//     );
-//     add_post_type_support('artist', 'thumbnail');
-
-// register_post_type('projects',
-//     array(
-//         'public' => true,
-//         'label' => 'Projects',
-//         'query_var' => true,
-//         'rewrite' => true,
-//         'show_in_rest' => true,
-//     )
-// );
-//     register_post_type('ausstellungen',
-//         array(
-//             'label' => 'Ausstellungen',
-//             'public' => true,
-//             'publicly_queryable' => true,
-//             'show_ui' => true,
-//             'show_in_menu' => true,
-//             'query_var' => true,
-//             'rewrite' => array(
-//                 'slug' => 'einzelausstellungen',
-//             ),
-//             'capability_type' => 'post',
-//             'has_archive' => true,
-//             'hierarchical' => false,
-//             'menu_position' => 2,
-//             'show_in_rest' => true,
-//         )
-//     );
-//     add_post_type_support('ausstellungen', 'thumbnail');
-
-// };

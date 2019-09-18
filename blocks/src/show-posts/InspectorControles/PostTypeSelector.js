@@ -10,19 +10,15 @@ var PostTypeSelector = withSelect(function(select) {
 		spostTypes: select("core").getPostTypes()
 	};
 })(function(props) {
-	// function getOptions() {
-	// 	if (props.postTypes) {
-	// 		return Object.keys(props.postTypes).map(key => {
-	// 			return {
-	// 				label: props.postTypes[key].label,
-	// 				value: props.postTypes[key].name
-	// 			};
-	// 		});
-	// 	}
-	// }
+	
 	function getOptions() {
 		if (props.spostTypes) {
-			return props.spostTypes.map(item => {
+			let filter =['Pages','Media','Blocks'];
+			let filteredPostTypes = props.spostTypes.filter((item)=>{
+				return !filter.includes(item.name)
+
+			})
+			return filteredPostTypes.map(item => {
 				return {
 					label: item.name,
 					value: item.slug
@@ -45,11 +41,11 @@ var PostTypeSelector = withSelect(function(select) {
 				options={getOptions()}
 				onChange={handleChange}
 			/>
-			{/* <PostTaxClass
+		    {/* <PostTaxClass
 				setAttributes={props.setAttributes}
 				attributes={props.attributes}
 				postTypes={props.spostTypes}
-			></PostTaxClass> */}
+			></PostTaxClass>  */}
 			<PostTaxSelector
 				setAttributes={props.setAttributes}
 				attributes={props.attributes}

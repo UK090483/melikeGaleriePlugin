@@ -43,7 +43,7 @@ class PostsBlock
     }
     public function my_block_render($attributes, $posts)
     {
-        error_log( var_export( $attributes, true));
+        // error_log( var_export( $attributes, true));
        
         $numOfPosts = -1;
         if (array_key_exists('numOfPosts', $attributes) && isset($attributes['numOfPosts'])) {
@@ -71,17 +71,21 @@ class PostsBlock
             ];
         }
  
-       
-        if (!empty($this->get_tax_queries($attributes))) {
-            $query['tax_query'] = $this->get_tax_queries($attributes);
-        }
 
-        $datequery=$this->get_meta_queries($attributes);
-        if (!empty($datequery)) {
-            $query['meta_query'] = $datequery;
+        $taxquery = $this->get_tax_queries($attributes);
+        if (!empty($taxquery)) {
+            $query['tax_query'] = $taxquery;
         }
+        if(  $attributes['selectedCategory'] !== 'artists'){
+            $datequery=$this->get_meta_queries($attributes);
+             if (!empty($datequery)) {
+                $query['meta_query'] = $datequery;
+             }
+        }
+       
 
         $the_query = new WP_Query($query);
+      
 
         ob_start();
         if ($the_query->have_posts()) {
@@ -144,6 +148,8 @@ class PostsBlock
 
         if (!empty($attributes['taxonomies'])) {
 
+            error_log('not empty taxquerry');
+
             if (count($attributes['taxonomies']) > 1) {
                 $tax_query['relation'] = 'AND';
             }
@@ -187,7 +193,7 @@ class PostsBlock
         $meta_query = array();
         $datequery = isset($attributes['dateQuery'])?$attributes['dateQuery']:false;
 
-        if(!$datequery)
+        if(!$datequery )
         {
             return;   
         }
