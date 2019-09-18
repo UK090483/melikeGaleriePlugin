@@ -1,91 +1,81 @@
 const { PanelBody, DateTimePicker, BaseControl, FormToggle } = wp.components;
 
 export default function PostDateControls(props) {
-	const { fromDateActive, toDateActive, fromDate, toDate } = props.attributes;
-	function handleFromDateChange(fromDate) {
+	const { fromDateActive,fromDateNow, fromDate,toDateActive,toDateNow,toDate  } = props.attributes.dateQuery;
+	
+
+	
+
+	function handleToggleChange(attr) {
+		let dq= {...props.attributes.dateQuery}
+		dq[attr] = !dq[attr]
 		props.setAttributes({
-			fromDate
-		});
-	}
-	function handleFromDateToggle() {
-		props.setAttributes({
-			fromDateActive: !fromDateActive
-		});
-	}
-	function handleToDateChange(toDate) {
-		props.setAttributes({
-			toDate
-		});
-	}
-	function handleToDateToggle() {
-		props.setAttributes({
-			toDateActive: !toDateActive
-		});
-	}
-	function handleNowFromChange() {
-		let res = fromDate === "now" ? "" : "now";
-		props.setAttributes({
-			fromDate: res
-		});
-	}
-	function handleNowToChange() {
-		let res = toDate === "now" ? "" : "now";
-		props.setAttributes({
-			toDate: res
+			dateQuery: dq
 		});
 	}
 
-	function isNow(attr) {
-		return props.attributes[attr] === "now";
+	function handleDatechange(attr,date){
+		console.log(date);
+		let dq= {...props.attributes.dateQuery}
+		dq[attr] = date
+		props.setAttributes({
+			dateQuery: dq
+		});
 	}
+
+
+	
 
 	return (
 		<PanelBody title={"Date"} initialOpen={false}>
 			<BaseControl label="From">
 				<FormToggle
 					checked={fromDateActive}
-					onChange={handleFromDateToggle}
+					onChange={()=>handleToggleChange('fromDateActive')}
 				></FormToggle>
 			</BaseControl>
 
 			{fromDateActive && (
 				<BaseControl label="now">
 					<FormToggle
-						checked={isNow("fromDate")}
-						onChange={handleNowFromChange}
+						checked={fromDateNow}
+						onChange={()=>handleToggleChange('fromDateNow')}
 					></FormToggle>
 				</BaseControl>
 			)}
-
-			{fromDateActive && !isNow("fromDate") && (
+ 
+			{fromDateActive && !fromDateNow && (
 				<DateTimePicker
-					onChange={handleFromDateChange}
-					currentDate={fromDate === "now" ? null : fromDate}
+					onChange={(date)=>handleDatechange('fromDate',date)}
+					currentDate={fromDate}
 				></DateTimePicker>
-			)}
+			)} 
 
 			<hr style={{ borderTop: "5px solid" }}></hr>
 
 			<BaseControl label="To">
 				<FormToggle
 					checked={toDateActive}
-					onChange={handleToDateToggle}
+					onChange={()=>handleToggleChange('toDateActive')}
 				></FormToggle>
 			</BaseControl>
+
 			{toDateActive && (
 				<BaseControl label="now">
 					<FormToggle
-						checked={isNow("toDate")}
-						onChange={handleNowToChange}
+						checked={toDateNow}
+						onChange={()=>handleToggleChange('toDateNow')}
 					></FormToggle>
 				</BaseControl>
 			)}
-			{toDateActive && !isNow("toDate") && (
+ 
+			{toDateActive && !toDateNow && (
 				<DateTimePicker
-					onChange={handleToDateChange}
-					currentDate={props.attributes.toDate}
+					onChange={(date)=>handleDatechange('toDate',date)}
+					currentDate={toDate}
 				></DateTimePicker>
-			)}
+			)} 
+
 		</PanelBody>
 	);
 }

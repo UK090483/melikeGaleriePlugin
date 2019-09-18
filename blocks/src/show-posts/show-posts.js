@@ -48,21 +48,17 @@ registerBlockType("cgb/show-posts", {
 			type: "number",
 			default: -1
 		},
-		fromDate: {
-			type: "string",
-			default: "now"
-		},
-		fromDateActive: {
-			type: "boolean",
-			default: false
-		},
-		toDate: {
-			type: "string",
-			default: "now"
-		},
-		toDateActive: {
-			type: "boolean",
-			default: false
+
+		dateQuery:{
+			type:'object',
+			default:{
+				fromDateActive: false,
+				fromDateNow: true,
+				fromDate:  null,
+				toDateActive: false,
+				toDateNow:true,
+				toDate: null,
+			}
 		}
 	},
 

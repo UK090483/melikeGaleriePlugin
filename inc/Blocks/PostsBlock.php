@@ -33,18 +33,9 @@ class PostsBlock
                     'isGutenberg' => array(
                         'type' => 'boolean',
                     ),
-                    'fromDate' => array(
-                        'type' => 'string',
-                    ),
-                    'fromDateActive' => array(
-                        'type' => 'boolean',
-                    ),
-                    'toDate' => array(
-                        'type' => 'string',
-                    ),
-                    'toDateActive' => array(
-                        'type' => 'boolean',
-                    ),
+                    'dateQuery'=> array(
+                        'type'=> 'object'
+                    )
 
                 ),
             )
@@ -52,6 +43,8 @@ class PostsBlock
     }
     public function my_block_render($attributes, $posts)
     {
+        error_log( var_export( $attributes, true));
+       
         $numOfPosts = -1;
         if (array_key_exists('numOfPosts', $attributes) && isset($attributes['numOfPosts'])) {
             $numOfPosts = (int) $attributes['numOfPosts'];
@@ -77,12 +70,15 @@ class PostsBlock
                 'post_status' => 'publish',
             ];
         }
-
+ 
+       
         if (!empty($this->get_tax_queries($attributes))) {
             $query['tax_query'] = $this->get_tax_queries($attributes);
         }
-        if (!empty($this->get_meta_queries($attributes))) {
-            $query['meta_query'] = $this->get_meta_queries($attributes);
+
+        $datequery=$this->get_meta_queries($attributes);
+        if (!empty($datequery)) {
+            $query['meta_query'] = $datequery;
         }
 
         $the_query = new WP_Query($query);
@@ -179,38 +175,55 @@ class PostsBlock
         return $tax_query;
 
     }
+    public function ku_test_bool($bool)
+    {
+        $res = true === $bool? true : 'true' ===$bool? true : false;
+        return boolval($res);
+    }
+
+
     public function get_meta_queries($attributes)
     {
         $meta_query = array();
+        $datequery = isset($attributes['dateQuery'])?$attributes['dateQuery']:false;
 
-        if (isset($attributes['fromDateActive']) && $attributes['fromDateActive'] || isset($attributes['toDateActive']) && $attributes['toDateActive']) {
+        if(!$datequery)
+        {
+            return;   
+        }
 
-            if (isset($attributes['fromDateActive']) && $attributes['fromDateActive'] && isset($attributes['toDateActive']) && $attributes['toDateActive']) {
-                $tax_query['relation'] = 'AND';
-            }
+        $fromDateActive = $this->ku_test_bool($datequery['fromDateActive']);
+        $fromDateNow = $this->ku_test_bool($datequery['fromDateNow']);
+        $toDateActive = $this->ku_test_bool($datequery['toDateActive']);
+        $toDateNow = $this->ku_test_bool($datequery['toDateActive']);
 
-            if ($attributes['fromDateActive']) {
 
-                $fromDate = $attributes['fromDate'] == 'now' || '' ? date('c') : $attributes['fromDate'];
-
-                array_push($meta_query, array(
-                    'key' => 'ku_start_date',
-                    'value' => $fromDate,
-                    'compare' => '>',
+        if ($fromDateActive && $toDateActive) {
+            $meta_query['relation'] = 'AND';
+            error_log('both active');
+        }
+  
+            
+        if($fromDateActive){
+            $fromDate = $fromDateNow ? date('c') : $datequery['fromDate'];
+            array_push($meta_query, array(
+                'key' => 'ku_start_date',
+                'value' => $fromDate,
+                'compare' => '>',
                 ));
             }
-            if (isset($attributes['toDateActive']) && $attributes['toDateActive']) {
 
-                $toDate = $attributes['toDate'] == 'now' || '' ? date('c') : $attributes['toDate'];
+            
+       
+            if ($toDateActive) {
 
+                $toDate =  $toDateNow  ? date('c') : $attributes['toDate'];
                 array_push($meta_query, array(
                     'key' => 'ku_start_date',
                     'value' => $toDate,
                     'compare' => '<',
                 ));
             }
-
-        }
 
         return $meta_query;
 
