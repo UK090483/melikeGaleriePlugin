@@ -43,7 +43,8 @@ class PostsBlock
     }
     public function my_block_render($attributes, $posts)
     {
-        // error_log( var_export( $attributes, true));
+        //  error_log( var_export( $attributes, true));
+        
        
         $numOfPosts = -1;
         if (array_key_exists('numOfPosts', $attributes) && isset($attributes['numOfPosts'])) {
@@ -93,13 +94,20 @@ class PostsBlock
             echo "<div class='ku-card-wrap'>";
 
             while ($the_query->have_posts()) {
+
                 $the_query->the_post();
                 $metaData = get_post_meta(get_the_ID());
                 $permaLink = get_the_permalink(get_the_ID());
+                
                 ?>
 
 <?php echo $isGutenberg ? '<div class="ku-card">' : '<a class="ku-card" href="' . $permaLink . '">' ?>
-         <?php $this->getBackgroundImage();?>
+         <?php
+          $thumpnail_url= get_the_post_thumbnail_url(get_the_ID(),'medium');
+          echo '<div class="ku-card-pic" style="background-image: url(' .  $thumpnail_url . ')"></div>';
+        //  $this->getBackgroundImage($thumpnail_url);
+         
+         ?>
                <div class="ku-card-info">
 
 
@@ -137,9 +145,13 @@ class PostsBlock
 
     }
 
-    public function getBackgroundImage()
+    public function getBackgroundImage( $thumpnail_url)
     {
-        echo '<div class="ku-card-pic" style="background-image: url(' . wp_get_attachment_url(get_post_thumbnail_id()) . ')"></div>';
+       
+        
+       
+
+        echo '<div class="ku-card-pic" style="background-image: url(' .  $thumpnail_url . ')"></div>';
     }
 
     public function get_tax_queries($attributes)
@@ -148,7 +160,7 @@ class PostsBlock
 
         if (!empty($attributes['taxonomies'])) {
 
-            error_log('not empty taxquerry');
+           
 
             if (count($attributes['taxonomies']) > 1) {
                 $tax_query['relation'] = 'AND';
